@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="munit-011-test-suite.xml" />
+	<munit:test name="munit-011-test-suite-munit-011FlowTest" description="Test" doc:id="21785682-ad2b-4f15-b4dd-9cef47d058f7" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5a38cbf8-c423-458f-9655-2468d469495b" processor="munit-011Flow">
+				<munit-tools:with-attributes />
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="7090d5e0-6f36-4752-8a23-3616444aa9a6" >
+				<munit:payload value="#['']" />
+				<munit:attributes value="#[{queryParams: {keyval: '1'}}]" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to munit-011Flow" doc:id="6494e183-dc08-4744-912b-b6c185353c2b" name="munit-011Flow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="c0edfd35-09ca-4f5b-9377-44949d66f2d1" expression="#[payload]" is="#[MunitTools::equalTo('Ramachandran')]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

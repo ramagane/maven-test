@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<os:object-store name="Object_store" doc:name="Object store" doc:id="07823b6f-6fb2-4632-aa88-aa99f4db614b" />
+	<flow name="munitobjectsstoreFlow" doc:id="d79cea41-5f18-44e9-a658-bcb3a7170f83" >
+		<http:listener doc:name="Listener" doc:id="17e1b01f-e26f-461d-9b16-4c0d699a3a03" config-ref="HTTP_Listener_config" path="/return"/>
+		<os:retrieve doc:name="Retrieve" doc:id="e508823b-fb70-4371-923e-905aea0ffe82" key="keyvalue" target="finalvalue" objectStore="Object_store"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a76b844c-c5ce-4494-a23e-ede979e03644" message="#[vars.finalvalue]"/>
+	</flow>
+</mule>

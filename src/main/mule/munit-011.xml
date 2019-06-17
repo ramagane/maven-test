@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="87204bf3-6bdc-4ef0-a93f-bb128d6df44c" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="munit-011Flow" doc:id="5350184e-075b-4a1c-b648-e786ba68dc23" >
+		<http:listener doc:name="Listener" doc:id="395a0499-6f10-4132-96cc-ce18567652cd" config-ref="HTTP_Listener_config" path="/munit"/>
+		<set-payload value="#[attributes.queryParams.keyval]" doc:name="Set Payload" doc:id="3547b770-a337-4259-bab0-a0230b6fd896" />
+		<choice doc:name="Choice" doc:id="af5da033-fcf5-4d82-932c-c57dcde730e5" >
+			<when expression="#[payload=='1']">
+				<set-payload value="#['Ramachandran']" doc:name="Set Payload" doc:id="b2f47adb-34fa-4058-8fd0-e38e760cdbc3" />
+			</when>
+			<otherwise >
+				<set-payload value="#['poorna']" doc:name="Set Payload" doc:id="8ddcbab0-c60b-4165-af46-87ec04f2ee07" />
+			</otherwise>
+		</choice>
+		<os:store doc:name="Store" doc:id="f7fa14a3-19ee-4eec-ad7d-8e04fee5edc8" key="keyvalue" objectStore="Object_store"/>
+	</flow>
+</mule>
